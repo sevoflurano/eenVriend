@@ -1,3 +1,8 @@
+mod functions;
+
 fn main() {
-    println!("Hello, world!");
+    loop {
+        functions::greet_user(String::new());
+        functions::user_option(String::new());
+    }
 }
