@@ -1,5 +1,5 @@
 use std::fs::OpenOptions;
-use std::io::{self, Write};
+use std::io::Write;
 
 pub fn greet_user(mut name: String) {
     println!("Insert your username:");
@@ -31,7 +31,20 @@ fn get_user_venting() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn change_moodbar() {
-    println!("Changing the daily moodbar...");
+    println!("Say to me, how are you right now? 1 to 10!");
+    let mut mood = String::new();
+    std::io::stdin()
+        .read_line(&mut mood)
+        .expect("Failed to read line");
+    let mood = mood
+        .trim()
+        .parse::<u8>()
+        .expect("Something get wrong with mood. Try again.");
+    if mood >= 1 && mood <= 10 {
+        let filled = "-".repeat(mood as usize);
+        let empty = "".repeat((10 - mood) as usize);
+        println!("[{}{}] {}", filled, empty, mood);
+    }
 }
 
 pub fn user_option(mut option: String) {
