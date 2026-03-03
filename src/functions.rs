@@ -1,11 +1,13 @@
 use std::fs::OpenOptions;
 use std::io::Write;
 
-pub fn greet_user(mut name: String) {
+pub fn greet_user() {
+    let mut name = String::new();
     println!("Insert your username:");
     std::io::stdin()
         .read_line(&mut name)
         .expect("Failed to read line");
+    let name = name.trim();
     println!(
         "Hello, {}! How can I help you today?\n 1) Put your feelings into words.\n 2) Change the daily moodbar. 3) Exit.",
         name.trim()
@@ -47,10 +49,12 @@ fn change_moodbar() {
     }
 }
 
-pub fn user_option(mut option: String) {
+fn user_option() {
+    let mut option = String::new();
     std::io::stdin()
         .read_line(&mut option)
         .expect("Failed to read line");
+
     match option.trim().parse::<u8>() {
         Ok(1) => {
             if let Err(e) = get_user_venting() {
